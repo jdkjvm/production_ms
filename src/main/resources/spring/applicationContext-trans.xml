@@ -37,7 +37,7 @@
 	<!-- 切面 -->
 	<aop:config>
 		<!-- 切点 管理所有Service的方法 -->
-		<aop:pointcut expression="execution(* org.hqu.telemedicine.service.*.*(..))" id="transactionPointCut"/>
+		<aop:pointcut expression="execution(* org.hqu.production_ms.service.*.*(..))" id="transactionPointCut"/>
 		<!-- 增强，进行事务控制 Advisor -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionPointCut"/>
 	</aop:config>
