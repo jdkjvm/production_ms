@@ -14,7 +14,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-
 	<!-- 加载springMVC servlet, 	配置前端控制器 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
