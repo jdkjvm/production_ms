@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/util/spring-util-4.0.xsd">
           
 	<!-- service和dao包扫描 -->
-	<context:component-scan base-package="org.hqu.production_ms.service,org.hqu.production_ms.dao"/>
+	<context:component-scan base-package="org.hqu.production_ms.service"/>
 	
     <!-- 指明配置文件存放位置 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>  
@@ -56,9 +56,24 @@
     
     <!-- sqlSessionFactory spring和myBatis整合 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
 		<property name="dataSource" ref="dataSource"/>
+		<!-- mybatis配置文件 -->
 		<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"/>
-		<property name="mapperLocations" value="classpath:org/hqu/production_ms/mapper/*.xml"/>
+	</bean>
+	
+	<!-- 
+	MapperScannerConfigurer：mapper的扫描器，将包下边的mapper接口自动创建代理对象，
+	自动创建到spring容器中，bean的id是mapper的类名（首字母小写）
+	 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 配置扫描包的路径
+		如果要扫描多个包，中间使用半角逗号分隔
+		要求mapper.xml和mapper.java同名且在同一个目录 
+		 -->
+		<property name="basePackage" value="org.hqu.production_ms.mapper"/>
+		<!-- 使用sqlSessionFactoryBeanName -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
     
 </beans>
