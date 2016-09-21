@@ -96,10 +96,11 @@ public class CustomRealm extends AuthorizingRealm {
 		activeUser.setMenus(menus);
 
 		//将activeUser设置simpleAuthenticationInfo
-		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
-				activeUser, password, ByteSource.Util.bytes(sysUser.getSalt()), this.getName());
+		/*SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
+				activeUser, password, ByteSource.Util.bytes(sysUser.getSalt()), this.getName());*/
 
-		return simpleAuthenticationInfo;
+		//return simpleAuthenticationInfo;
+		return null;
 	}
 	
 	

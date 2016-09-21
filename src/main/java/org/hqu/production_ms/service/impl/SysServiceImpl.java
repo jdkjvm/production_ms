@@ -43,15 +43,12 @@ public class SysServiceImpl implements SysService {
 		SysUser sysUser = this.getSysUserByName(username);
 		
 		if(sysUser == null){
-			//抛出异常
-			throw new CustomException("用户账号不存在");
+			return null;
 		}
 		
 		//对输入的密码 和数据库密码 进行比对，如果一致，认证通过
-		//对页面输入的密码 进行md5加密 
 		if(!password.equals(sysUser.getPassword())){
-			//抛出异常
-			throw new CustomException("用户名或密码错误");
+			return null;
 		}
 		//得到用户id
 		String userid = sysUser.getId();
