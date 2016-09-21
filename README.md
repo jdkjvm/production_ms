@@ -13,5 +13,5 @@
 - [Druid（数据源配置 sql防注入 sql性能监控)](http://wosyingjun.iteye.com/blog/2306139)
 - 统一的异常处理
 - JSP JSTL JavaScript
-- Sping Shiro权限控制
+- 基于url的权限控制
 - jQuery EasyUI
