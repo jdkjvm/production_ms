@@ -8,26 +8,26 @@ public class SysRole {
     private String available;
 
     public String getId() {
-	return id;
+        return id;
     }
 
     public void setId(String id) {
-	this.id = id == null ? null : id.trim();
+        this.id = id == null ? null : id.trim();
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(String name) {
-	this.name = name == null ? null : name.trim();
+        this.name = name == null ? null : name.trim();
     }
 
     public String getAvailable() {
-	return available;
+        return available;
     }
 
     public void setAvailable(String available) {
-	this.available = available == null ? null : available.trim();
+        this.available = available == null ? null : available.trim();
     }
 }
