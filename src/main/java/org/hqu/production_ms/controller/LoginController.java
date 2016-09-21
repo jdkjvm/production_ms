@@ -1,6 +1,8 @@
 package org.hqu.production_ms.controller;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.exception.CustomException;
 import org.hqu.production_ms.service.SysService;
@@ -47,17 +50,13 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/login")
-	public void login(HttpServletRequest request, HttpServletResponse response,
+	public @ResponseBody Map<String,Object> login(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session)throws Exception{
 		
+		Map<String,Object> map = new HashMap<String,Object>();  
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		response.setContentType("text/html");
-        response.setCharacterEncoding("utf-8");
-        PrintWriter out = null;
-        out = response.getWriter();
-        
 	/*	//校验验证码，防止恶性攻击
 		//从session获取正确验证码
 		String validateCode = (String) session.getAttribute("validateCode");
@@ -75,10 +74,11 @@ public class LoginController {
 			//如果service校验通过，将用户身份记录到session
 			session.setAttribute("activeUser", activeUser);
 			//重定向到商品查询页面
-			out.println("success");
+			map.put("msg", "success");
 		}else{
-			out.println("用户名或密码错误！");
+			map.put("msg", "用户名或密码错误！");
 		}
+		return map; 
 	}
 	
 	//登陆提交地址，和applicationContext-shiro.xml中配置的loginurl一致

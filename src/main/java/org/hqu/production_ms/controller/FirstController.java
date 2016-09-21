@@ -15,21 +15,21 @@ public class FirstController {
 	@RequestMapping("/first")
 	public String first(Model model)throws Exception{
 		
-		//从shiro的session中取activeUser
+		/*//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		//通过model传到页面
-		model.addAttribute("activeUser", activeUser);
+		model.addAttribute("activeUser", activeUser);*/
 		
 		return "login.jsp";
 	}
 	
 	//欢迎页面
-	@RequestMapping("/welcome")
+	@RequestMapping("/home")
 	public String welcome(Model model)throws Exception{
 		
-		return "welcome";
+		return "home.jsp";
 		
 	}
 }	
