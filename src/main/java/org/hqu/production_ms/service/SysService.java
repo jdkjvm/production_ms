@@ -21,8 +21,8 @@ public interface SysService {
 	 *
 	 * @param  userCode, password
 	 * @return 用户身份信息ActiveUser
-	 *//*
-	public ActiveUser authenticat(String userCode,String password) throws Exception;*/
+	 */
+	public ActiveUser authenticat(String userCode,String password) throws Exception;
 	
 	/**
 	 * 根据用户id查询用户信息

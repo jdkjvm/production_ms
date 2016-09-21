@@ -22,14 +22,14 @@ public class FirstController {
 		//通过model传到页面
 		model.addAttribute("activeUser", activeUser);
 		
-		return "/first.jsp";
+		return "login.jsp";
 	}
 	
 	//欢迎页面
 	@RequestMapping("/welcome")
 	public String welcome(Model model)throws Exception{
 		
-		return "/welcome";
+		return "welcome";
 		
 	}
 }	

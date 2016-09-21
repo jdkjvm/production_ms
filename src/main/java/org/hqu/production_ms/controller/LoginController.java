@@ -1,7 +1,10 @@
 package org.hqu.production_ms.controller;
 
+import java.io.PrintWriter;
+
 import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
@@ -12,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.exception.CustomException;
 import org.hqu.production_ms.service.SysService;
 
@@ -42,10 +46,19 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	/*@RequestMapping("/login")
-	public String login(HttpSession session, String randomcode,String usercode,String password)throws Exception{
+	@RequestMapping("/login")
+	public void login(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session)throws Exception{
 		
-		//校验验证码，防止恶性攻击
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		response.setContentType("text/html");
+        response.setCharacterEncoding("utf-8");
+        PrintWriter out = null;
+        out = response.getWriter();
+        
+	/*	//校验验证码，防止恶性攻击
 		//从session获取正确验证码
 		String validateCode = (String) session.getAttribute("validateCode");
 		
@@ -54,18 +67,22 @@ public class LoginController {
 			//抛出异常
 			throw new CustomException("验证码输入错误");
 		}
-		
+		*/
 		//调用service校验用户账号和密码的正确性
-		ActiveUser activeUser = sysService.authenticat(usercode, password);
-		
-		//如果service校验通过，将用户身份记录到session
-		session.setAttribute("activeUser", activeUser);
-		//重定向到商品查询页面
-		return "redirect:/first.action";
-	}*/
+		ActiveUser activeUser = sysService.authenticat(username, password);
+		if(activeUser!=null){
+			
+			//如果service校验通过，将用户身份记录到session
+			session.setAttribute("activeUser", activeUser);
+			//重定向到商品查询页面
+			out.println("success");
+		}else{
+			out.println("用户名或密码错误！");
+		}
+	}
 	
 	//登陆提交地址，和applicationContext-shiro.xml中配置的loginurl一致
-	@RequestMapping("/login")
+	/*@RequestMapping("/login")
 	public String login(HttpServletRequest request) throws Exception{
 		
 		//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
@@ -86,8 +103,8 @@ public class LoginController {
 		}
 		//此方法不处理登陆成功（认证成功），shiro认证成功会自动跳转到上一个请求路径
 		//登陆失败还到login页面
-		return "login.jsp";
-	}
+		return "login";
+	}*/
 	
 /*	//用户退出
 	@RequestMapping("/logout")
