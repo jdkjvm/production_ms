@@ -13,16 +13,25 @@
        	<div style="margin-left: 50px;margin-top: 50px;">
        		<div style="margin-bottom:20px;">
 	            <div>
-	            	用户名: <input name="username" class="easyui-textbox" data-options="required:true" style="width:200px;height:32px"/>
+	            	用户名: <input id="username" class="easyui-textbox" data-options="required:true" style="width:200px;height:32px"/>
+	            </div>
+	            <div>
+	            	<span id="userspan"></span>
 	            </div>
 	        </div>
 	        <div style="margin-bottom:20px">
 	            <div>
-	            	密&nbsp;&nbsp;码: <input name="password" class="easyui-textbox" type="password" style="width:200px;height:32px" />
+	            	密&nbsp;&nbsp;码: <input id="password" class="easyui-textbox" type="password" style="width:200px;height:32px" />
+	            </div>
+	            <div>
+	            	<span id="passsword_span"></span>
 	            </div>
 	        </div>
 	        <div>
 	            <a id="login" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height:32px;margin-left: 50px">登录</a>
+	        </div>
+	        <div>
+	            	<span id="error_span"></span>
 	        </div>
        	</div>
     </div>
@@ -30,18 +39,19 @@
     <script type="text/javascript">
     	$("#login").click(function(){
     		
-    		window.location.href="/rest/page/index";
     		var uname = $("#username");  
         	var pwd = $("#password");  
         
         	if ($.trim(uname.val()) == ""){ 
+        		$("#passsword_span").html("");
                	$("#userspan").html("<font color='red'>用户名不能为空！</font>");
-               	userId.focus();  
+               	uname.focus();  
            	}else if ($.trim(pwd.val()) == ""){  
         	   	$("#userspan").html("");
                	$("#passsword_span").html("<font color='red'>密码不能为空！</font>");
                	pwd.focus();  
            	}else{  
+           		$("#userspan").html("");
     			$("#passsword_span").html("");
     			
                 $.ajax( {  
