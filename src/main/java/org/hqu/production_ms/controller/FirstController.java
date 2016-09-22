@@ -1,5 +1,8 @@
 package org.hqu.production_ms.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.hqu.production_ms.domain.ActiveUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,18 +11,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FirstController {
 	
-	//系统首页
+	//跳转登录
 	@RequestMapping("/first")
 	public String first(Model model)throws Exception{
 		
 		return "login.jsp";
 	}
 	
-	//欢迎页面
+	//首页
 	@RequestMapping("/home")
-	public String welcome(Model model)throws Exception{
+	public String welcome(HttpSession session, Model model)throws Exception{
 		
-		return "home.jsp";
+		Object obj = session.getAttribute("activeUser");
 		
+		if(obj != null && !obj.equals("")){
+			return "home.jsp";
+		}else{
+			return "login.jsp";
+		}
 	}
 }	
