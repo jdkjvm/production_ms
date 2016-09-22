@@ -57,18 +57,10 @@ public class LoginController {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-	/*	//校验验证码，防止恶性攻击
-		//从session获取正确验证码
-		String validateCode = (String) session.getAttribute("validateCode");
 		
-		//输入的验证和session中的验证进行对比 
-		if(!randomcode.equals(validateCode)){
-			//抛出异常
-			throw new CustomException("验证码输入错误");
-		}
-		*/
 		//调用service校验用户账号和密码的正确性
 		ActiveUser activeUser = sysService.authenticat(username, password);
+		
 		if(activeUser!=null){
 			
 			//如果service校验通过，将用户身份记录到session
@@ -80,6 +72,7 @@ public class LoginController {
 		}
 		return map; 
 	}
+	
 	
 	//登陆提交地址，和applicationContext-shiro.xml中配置的loginurl一致
 	/*@RequestMapping("/login")
