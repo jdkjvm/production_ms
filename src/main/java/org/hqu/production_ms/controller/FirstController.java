@@ -15,7 +15,7 @@ public class FirstController {
 	@RequestMapping("/first")
 	public String first(Model model)throws Exception{
 		
-		return "login.jsp";
+		return "login";
 	}
 	
 	//首页
@@ -25,9 +25,9 @@ public class FirstController {
 		Object obj = session.getAttribute("activeUser");
 		
 		if(obj != null && !obj.equals("")){
-			return "home.jsp";
+			return "home";
 		}else{
-			return "login.jsp";
+			return "login";
 		}
 	}
 }	
